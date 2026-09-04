@@ -1,0 +1,43 @@
+Frames Performance & Reliability Test
+Date: 2026-09-04
+Environment: Live Amplify deployment
+Region: eu-west-2
+
+END-TO-END UPLOAD LATENCY
+Measured flow: S3 upload → DynamoDB post creation → feed refresh
+
+54 KB image:
+Run 1: 1.85 s
+Run 2: 1.18 s
+Run 3: 1.25 s
+Average: 1.43 s
+
+357 KB image:
+Run 1: 1.20 s
+Run 2: 0.99 s
+Run 3: 1.00 s
+Average: 1.06 s
+
+648 KB image:
+Run 1: 1.10 s
+Run 2: 1.00 s
+Run 3: 0.89 s
+Average: 1.00 s
+
+Overall average across 9 uploads: 1.16 s
+Fastest: 0.89 s
+Slowest: 1.85 s
+
+RELIABILITY TEST
+Image size: ~54 KB
+Attempts: 10
+Successful: 10
+Failed: 0
+Observed success rate: 100% (10/10)
+
+CLOUDWATCH — frames-image-processor
+Monitoring window around test period:
+Invocations: 3
+Errors: 0
+Average duration: 318.26 ms
+Maximum duration: 592.66 ms
