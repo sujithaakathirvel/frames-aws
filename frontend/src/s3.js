@@ -1,12 +1,17 @@
 import { S3Client } from "@aws-sdk/client-s3";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 const s3 = new S3Client({
   region: "eu-west-2",
-  credentials: {
-    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-    secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
+  credentials: async () => {
+    const { credentials } = await fetchAuthSession();
+
+    if (!credentials) {
+      throw new Error("No Cognito credentials available");
+    }
+
+    return credentials;
   },
-  forcePathStyle: true,
 });
 
 export default s3;
